@@ -6,9 +6,8 @@ import (
 )
 
 func main() {
-	qr, err := qrcode.New("https://google.com", qrcode.Medium)
+	err := qrcode.WriteFile("https://google.com", qrcode.Medium, 256, "qr.png")
 	if err != nil {
 		log.Fatal(err)
 	}
-	println(qr.ToString(false))
 }
