@@ -1,9 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"github.com/skip2/go-qrcode"
+	"log"
 )
 
 func main() {
-	fmt.Println("Hello")
+	qr, err := qrcode.New("https://google.com", qrcode.Medium)
+	if err != nil {
+		log.Fatal(err)
+	}
+	println(qr.ToString(false))
 }
