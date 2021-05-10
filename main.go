@@ -9,6 +9,11 @@ import (
 )
 
 func main() {
+	content, outputName, size := parseFlags()
+	createQRCode(content, outputName, size)
+}
+
+func parseFlags() (string, string, int) {
 	var (
 		content    string
 		outputName string
@@ -35,6 +40,10 @@ func main() {
 		os.Exit(1)
 	}
 
+	return content, outputName, size
+}
+
+func createQRCode(content string, outputName string, size int) {
 	err := qrcode.WriteFile(content, qrcode.Medium, size, outputName)
 	if err != nil {
 		log.Fatal(err)
