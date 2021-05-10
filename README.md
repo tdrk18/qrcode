@@ -15,7 +15,7 @@ make xbuild
 
 ## Usage
 ```
-./bin/qrcode-generator -o one.png -s 240 -c https://google.com
+./bin/qrcode-generator -o one.png -s 240 -c https://google.com -l high
 ```
 
 ### flags
@@ -24,3 +24,4 @@ make xbuild
 | -content, -c | QRCode content |
 | -output, -o | The file name of output |
 | -size, -s | The frame size of the output QRCode |
+| -level, -l | The recovery level of the output QRCode |
