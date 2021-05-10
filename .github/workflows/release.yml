@@ -1,0 +1,43 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.15.8
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15.8
+        id: go
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Build and archive
+        run: |
+          make xbuild
+          make archive
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: ./artifacts.zip
+
+      - name: Create release note
+        id: create_release_note
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          files: |
+              artifacts.zip
